@@ -89,10 +89,11 @@ def simular_escenario(cambios, mes=None):
 
     resultado = {}
     for eq, p in pesos.items():
-        antes = sum(p[i] * base[i] for i in p.index)
-        despues = sum(p[i] * nuevo[i] for i in p.index)
-        resultado[eq] = {"escenario_central": round(float(antes), 1), "con_cambios": round(float(despues), 1),
-                         "diferencia_pct": round(float(despues / antes - 1) * 100, 2)}
+        cambio = sum(p[i] * nuevo[i] for i in p.index) / sum(p[i] * base[i] for i in p.index) - 1
+        central = pronostico.loc[fecha, (eq, "P50")]  # mismo P50 que consultar_pronostico
+        resultado[eq] = {"escenario_central": round(float(central), 1),
+                         "con_cambios": round(float(central * (1 + cambio)), 1),
+                         "diferencia_pct": round(float(cambio) * 100, 2)}
     return {"mes": f"{fecha:%Y-%m}", "cambios_aplicados_pct": cambios, "resultado": resultado}
 
 
