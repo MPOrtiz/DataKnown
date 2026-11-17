@@ -49,7 +49,9 @@ with st.sidebar:
         st.rerun()
 
 st.title("🏗️ Agente de costos de equipos")
-st.caption(f"Pronóstico disponible de {pronostico.index[0]:%b-%Y} a {pronostico.index[-1]:%b-%Y}. "
+MESES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"]
+ini, fin = pronostico.index[0], pronostico.index[-1]
+st.caption(f"Pronóstico disponible de {MESES[ini.month - 1]}-{ini.year} a {MESES[fin.month - 1]}-{fin.year}. "
            "Horizonte recomendado: 6 meses.")
 
 if "agente" not in st.session_state:

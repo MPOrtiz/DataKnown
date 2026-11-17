@@ -48,7 +48,9 @@ def consultar_pronostico(serie, mes=None):
     """Percentiles del pronóstico para un equipo o insumo, de un mes o de los 12."""
     if serie not in EQUIPOS + INSUMOS:
         return {"error": f"Serie desconocida: {serie}. Opciones: {EQUIPOS + INSUMOS}"}
-    tabla = pronostico[serie].round(1)
+    tabla = pronostico[serie].copy()
+    tabla["rango_90_pct"] = (tabla["P95"] - tabla["P5"]) / tabla["P50"] * 100  # ancho del rango como % del P50
+    tabla = tabla.round(1)
     if mes:
         tabla = tabla[tabla.index.strftime("%Y-%m") == mes[:7]]
         if tabla.empty:
