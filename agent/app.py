@@ -96,8 +96,11 @@ EJEMPLOS = [
 
 def chips(usadas):
     if usadas:
-        html = "".join(f'<span class="herramienta">{NOMBRES.get(u["herramienta"], u["herramienta"])}</span>'
-                       for u in usadas)
+        conteo = {}
+        for u in usadas:
+            conteo[u["herramienta"]] = conteo.get(u["herramienta"], 0) + 1
+        html = "".join(f'<span class="herramienta">{NOMBRES.get(h, h)}{f" ×{n}" if n > 1 else ""}</span>'
+                       for h, n in conteo.items())
         st.markdown(html, unsafe_allow_html=True)
         with st.expander("Ver detalle de las herramientas"):
             st.json(usadas)

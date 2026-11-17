@@ -24,6 +24,11 @@ pesos = {
 ultimo = mensual.iloc[-1]
 elasticidades = {eq: {i: round(float(p[i] * ultimo[i] / ultimo[eq]), 2) for i in p.index} for eq, p in pesos.items()}
 
+# incertidumbre relativa en el horizonte recomendado (6 meses), calculada aquí y no por el LLM
+rango_rel = {eq: ((pronostico[(eq, 'P95')] - pronostico[(eq, 'P5')]) / pronostico[(eq, 'P50')] * 100).head(6)
+             for eq in EQUIPOS}
+mas_incierto = max(rango_rel, key=lambda eq: rango_rel[eq].mean())
+
 # resultados clave de los notebooks 3 y 4
 RESUMEN = {
     "datos": "Precios mensuales (promedio del mes) de ene-2010 a ago-2023. Se excluyó el 2014-03-25 por un error de captura en Z.",
@@ -39,6 +44,12 @@ RESUMEN = {
                           "volatilidad ampliada 1.3x para calibrar los intervalos.",
     "error_por_horizonte_MAPE": {"1 mes": "4-5%", "3 meses": "9-12%", "6 meses": "13-16%", "12 meses": "20-25%"},
     "cobertura_intervalo_90": "87-89% en el backtest",
+    "comparacion_incertidumbre_6_meses": {
+        "rango_90_pct_del_P50": {eq: f"de {v.iloc[0]:.0f}% en el mes 1 a {v.iloc[-1]:.0f}% en el mes 6"
+                                 for eq, v in rango_rel.items()},
+        "equipo_mas_incierto": mas_incierto,
+        "motivo": "Equipo1 depende 80% de Y, el insumo más volátil; Equipo2 reparte su riesgo entre X, Y y Z.",
+    },
     "horizonte_recomendado": "6 meses, actualizando el pronóstico cada mes. Los meses 7 a 12 son escenarios.",
     "ultimo_dato": str(mensual.index[-1].date()),
 }
