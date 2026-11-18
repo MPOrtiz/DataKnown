@@ -33,14 +33,14 @@ mas_incierto = max(rango_rel, key=lambda eq: rango_rel[eq].mean())
 RESUMEN = {
     "datos": "Precios mensuales (promedio del mes) de ene-2010 a ago-2023. Se excluyó el 2014-03-25 por un error de captura en Z.",
     "formula": {eq: {k: round(float(v), 3) for k, v in p.items()} for eq, p in pesos.items()},
-    "interpretacion": "Equipo1 = 0.2·X + 0.8·Y; Equipo2 = (X + Y + Z) / 3. Z no influye en Equipo1. "
+    "interpretacion": "Equipo1 = 0.2X + 0.8Y; Equipo2 = (X + Y + Z) / 3. Z no influye en Equipo1. "
                       "Los equipos reaccionan a sus insumos en el mismo mes, sin rezagos. "
                       "Los pesos son en unidades de precio, no en porcentaje: el impacto % depende del nivel de precio de cada insumo.",
     "elasticidades": elasticidades,
     "elasticidades_nota": "Cambio % del equipo por cada 1% de cambio en el insumo, con los precios del último mes.",
     "modelo_elegido": "Regresión lineal. Se compararon 8 modelos (lineal, Ridge, Lasso, árbol, Random Forest, "
-                      "Gradient Boosting, KNN, SVR); los lineales tuvieron ~0.27% de error y los de árboles 9-18 veces más.",
-    "pronostico_insumos": "Simulación de 5,000-10,000 escenarios con block bootstrap de los retornos conjuntos de X, Y, Z; "
+                      "Gradient Boosting, KNN, SVR); los lineales tuvieron ~0.27% de error y los demás entre 9 y 18 veces más.",
+    "pronostico_insumos": "Simulación de 10,000 escenarios con block bootstrap de los retornos conjuntos de X, Y, Z; "
                           "volatilidad ampliada 1.3x para calibrar los intervalos.",
     "error_por_horizonte_MAPE": {"1 mes": "4-5%", "3 meses": "9-12%", "6 meses": "13-16%", "12 meses": "20-25%"},
     "cobertura_intervalo_90": "87-89% en el backtest",

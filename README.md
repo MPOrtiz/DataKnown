@@ -2,9 +2,9 @@
 
 Análisis de qué materias primas determinan el costo de dos equipos críticos, un pronóstico mensual con intervalos de confianza y un agente de IA en Azure que responde preguntas sobre los resultados y los complementa con noticias del mercado.
 
-- 📄 **Informe completo:** [reports/informe.md](reports/informe.md)
-- 🤖 **Agente en línea:** https://app-dataknown-caso.azurewebsites.net
-- 🏗️ **Arquitectura:** [infra/arquitectura_azure.png](infra/arquitectura_azure.png) · editable en [infra/arquitectura_azure.drawio](infra/arquitectura_azure.drawio)
+- **Informe completo:** [reports/informe.md](reports/informe.md)
+- **Agente en línea:** https://app-dataknown-caso.azurewebsites.net
+- **Arquitectura:** [infra/arquitectura_azure.png](infra/arquitectura_azure.png) (editable en [infra/arquitectura_azure.drawio](infra/arquitectura_azure.drawio))
 
 ---
 
@@ -14,7 +14,7 @@ Análisis de qué materias primas determinan el costo de dos equipos críticos, 
 
 | Equipo | Fórmula | Insumo dominante |
 |---|---|---|
-| Equipo1 | `0.2·X + 0.8·Y` | Y (Z no influye) |
+| Equipo1 | `0.2X + 0.8Y` | Y (Z no influye) |
 | Equipo2 | `(X + Y + Z) / 3` | Z en términos de % de cambio |
 
 R² de 0.9997 en ambos. La correlación de 0.85 entre Equipo1 y Z es espuria: desaparece al analizar los cambios mensuales.
@@ -44,7 +44,7 @@ R² de 0.9997 en ambos. La correlación de 0.85 entre Equipo1 y Z es espuria: de
 ├── notebooks/
 │   ├── 1_eda.ipynb                     # calidad de datos y outlier de Z
 │   ├── 2_seleccion_variables.ipynb     # estacionariedad, regresión, rezagos, cointegración, fórmula
-│   ├── 3_seleccion_modelo.ipynb        # 8 modelos → 3 finalistas → regresión lineal
+│   ├── 3_seleccion_modelo.ipynb        # 8 modelos, 3 finalistas, regresión lineal
 │   └── 4_pronostico.ipynb              # backtest, simulación, calibración, horizonte
 ├── src/
 │   └── datos.py              # lectura, validación y limpieza de los datos
@@ -73,7 +73,7 @@ pip install -r requirements.txt
 
 ### 2. Correr los notebooks en orden
 
-`1_eda` → `2_seleccion_variables` → `3_seleccion_modelo` → `4_pronostico`
+`1_eda` -> `2_seleccion_variables` -> `3_seleccion_modelo` -> `4_pronostico`
 
 Cada notebook lee los resultados del anterior desde `data/processed/`. El notebook 4 genera `data/processed/pronostico_12m.csv`, que usa el agente.
 
@@ -125,4 +125,4 @@ Principio de diseño: **el LLM interpreta la pregunta y redacta la respuesta; lo
 
 ## Tecnologías
 
-Python · pandas · statsmodels · scikit-learn · Streamlit · Altair · Azure OpenAI (`gpt-5.4-mini`) · Azure App Service · Azure CLI
+Python, pandas, statsmodels, scikit-learn, Streamlit, Altair, Azure OpenAI (`gpt-5.4-mini`), Azure App Service, Azure CLI

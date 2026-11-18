@@ -10,7 +10,7 @@ sys.path.append(str(Path(__file__).resolve().parent))
 from agente import Agente  # noqa: E402
 from herramientas import mensual, pronostico  # noqa: E402
 
-st.set_page_config(page_title="Agente de costos de equipos", page_icon="🏗️", layout="wide")
+st.set_page_config(page_title="Agente de costos de equipos", layout="wide")
 
 AZUL, AZUL_OSCURO, VERDE, NARANJA = "#2563EB", "#0F2A4A", "#16A34A", "#EA580C"
 MESES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"]
@@ -77,11 +77,11 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 NOMBRES = {
-    "consultar_pronostico": "📈 pronóstico",
-    "consultar_historico": "🗂️ histórico",
-    "simular_escenario": "🧪 escenario",
-    "resultados_modelo": "📘 metodología",
-    "buscar_noticias": "📰 noticias",
+    "consultar_pronostico": "pronóstico",
+    "consultar_historico": "histórico",
+    "simular_escenario": "escenario",
+    "resultados_modelo": "metodología",
+    "buscar_noticias": "noticias",
 }
 
 EJEMPLOS = [
@@ -99,36 +99,36 @@ def chips(usadas):
         conteo = {}
         for u in usadas:
             conteo[u["herramienta"]] = conteo.get(u["herramienta"], 0) + 1
-        html = "".join(f'<span class="herramienta">{NOMBRES.get(h, h)}{f" ×{n}" if n > 1 else ""}</span>'
+        html = "".join(f'<span class="herramienta">{NOMBRES.get(h, h)}{f" x{n}" if n > 1 else ""}</span>'
                        for h, n in conteo.items())
         st.markdown(html, unsafe_allow_html=True)
         with st.expander("Ver detalle de las herramientas"):
             st.json(usadas)
 
 
-# ---------- barra lateral ----------
+# barra lateral
 with st.sidebar:
-    st.markdown("## 🏗️ Agente de costos")
-    st.caption("Azure OpenAI · gpt-5.4-mini")
+    st.markdown("## Agente de costos")
+    st.caption("Azure OpenAI, gpt-5.4-mini")
     st.markdown(
         "Responde preguntas sobre el costo de los equipos y lo complementa con noticias del mercado.\n\n"
         "**Herramientas**\n"
-        "- 📈 Pronóstico (12 meses)\n"
-        "- 🗂️ Histórico\n"
-        "- 🧪 Escenarios de materias primas\n"
-        "- 📘 Metodología\n"
-        "- 📰 Noticias de la web"
+        "- Pronóstico (12 meses)\n"
+        "- Histórico\n"
+        "- Escenarios de materias primas\n"
+        "- Metodología\n"
+        "- Noticias de la web"
     )
     st.divider()
-    if st.button("🔄 Nueva conversación", use_container_width=True):
+    if st.button("Nueva conversación", use_container_width=True):
         st.session_state.clear()
         st.rerun()
 
-# ---------- encabezado ----------
+# encabezado
 ini, fin = pronostico.index[0], pronostico.index[-1]
 st.markdown(f"""
 <div class="encabezado">
-  <h1>🏗️ Agente de costos de equipos</h1>
+  <h1>Agente de costos de equipos</h1>
   <p>Pronóstico del costo de Equipo1 y Equipo2 a partir de las materias primas X, Y y Z,
      con contexto de mercado en tiempo real.</p>
   <span class="etiqueta">Pronóstico {mes_txt(ini)} a {mes_txt(fin)}</span>
@@ -137,7 +137,7 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-# ---------- tarjetas ----------
+# tarjetas
 def tarjeta(columna, titulo, valor, detalle, color=AZUL):
     columna.markdown(f"""
     <div class="tarjeta" style="border-left-color:{color}">
@@ -150,15 +150,15 @@ def tarjeta(columna, titulo, valor, detalle, color=AZUL):
 c1, c2, c3, c4 = st.columns(4)
 for col, eq, color in [(c1, "Equipo1", AZUL), (c2, "Equipo2", VERDE)]:
     p = pronostico[eq].iloc[5]
-    tarjeta(col, f"{eq} · {mes_txt(pronostico.index[5])}", f"{p['P50']:,.0f}",
-            f"Rango 90%: {p['P5']:,.0f} – {p['P95']:,.0f}", color)
-tarjeta(c3, "Fórmula Equipo1", "0.2·X + 0.8·Y", "Z no influye", AZUL_OSCURO)
+    tarjeta(col, f"{eq}, {mes_txt(pronostico.index[5])}", f"{p['P50']:,.0f}",
+            f"Rango 90%: {p['P5']:,.0f} a {p['P95']:,.0f}", color)
+tarjeta(c3, "Fórmula Equipo1", "0.2X + 0.8Y", "Z no influye", AZUL_OSCURO)
 tarjeta(c4, "Fórmula Equipo2", "(X+Y+Z) / 3", "Mismo mes, sin rezagos", NARANJA)
 st.write("")
 
-tab_chat, tab_pronostico, tab_agente = st.tabs(["💬 Chat con el agente", "📈 Pronóstico", "🧠 ¿Modelo o agente?"])
+tab_chat, tab_pronostico, tab_agente = st.tabs(["Chat con el agente", "Pronóstico", "¿Modelo o agente?"])
 
-# ---------- chat ----------
+# chat
 with tab_chat:
     if "agente" not in st.session_state:
         st.session_state.agente = Agente()
@@ -178,7 +178,7 @@ with tab_chat:
             if m["rol"] == "assistant":
                 chips(m.get("herramientas"))
 
-    escrita = st.chat_input("Escribe tu pregunta sobre costos, escenarios o el mercado…")
+    escrita = st.chat_input("Escribe tu pregunta sobre costos, escenarios o el mercado...")
     pregunta = escrita or pregunta
 
     if pregunta:
@@ -186,7 +186,7 @@ with tab_chat:
         with st.chat_message("user"):
             st.markdown(pregunta)
         with st.chat_message("assistant"):
-            with st.spinner("Analizando…"):
+            with st.spinner("Analizando..."):
                 try:
                     respuesta, usadas = st.session_state.agente.preguntar(pregunta)
                 except Exception as e:
@@ -196,7 +196,7 @@ with tab_chat:
         st.session_state.historial.append({"rol": "assistant", "texto": respuesta, "herramientas": usadas})
         st.rerun()
 
-# ---------- pronóstico ----------
+# pronóstico
 with tab_pronostico:
     eq = st.radio("Equipo", ["Equipo1", "Equipo2"], horizontal=True)
     hist = mensual[eq].loc["2021":].rename("valor").reset_index().rename(columns={"Date": "fecha"})
@@ -221,7 +221,7 @@ with tab_pronostico:
 
     st.altair_chart((banda90 + banda50 + historico + central + corte).properties(height=380).interactive(),
                     use_container_width=True)
-    st.caption("Línea oscura: histórico · Línea azul: escenario central · Bandas: rangos de 50% y 90% · "
+    st.caption("Línea oscura: histórico. Línea azul: escenario central. Bandas: rangos de 50% y 90%. "
                "Punteada: fin del horizonte recomendado (6 meses)")
 
     tabla = pronostico[eq].head(6).copy()
@@ -229,7 +229,7 @@ with tab_pronostico:
     tabla["Rango 90% (% del P50)"] = (tabla["P95"] - tabla["P5"]) / tabla["P50"] * 100
     st.dataframe(tabla.round(1), use_container_width=True)
 
-# ---------- explicación ----------
+# explicación
 with tab_agente:
     a, b = st.columns(2)
     a.markdown(f"""

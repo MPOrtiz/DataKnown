@@ -93,7 +93,7 @@ Para producción propongo (borde punteado): Data Factory para la ingesta, Data L
 - X, Y y Z dentro de `historico_equipos.csv` coinciden al 100% con sus archivos originales.
 - Sin nulos ni fechas duplicadas. Y no cambia de precio en el 55% de los días: se mueve en escalones.
 - **Un dato erróneo:** Z vale 1,911.97 el 2014-03-25 (+13%) y regresa a 1,705 al día siguiente. El resto de la serie son múltiplos de 0.25. Revisé las noticias de esa semana y el aluminio se movió menos de 1% ese día, así que no fue un evento de mercado.
-- **El dato erróneo dio la primera pista:** Equipo2 también subió ese día (783 → 828, +6%) y Equipo1 no. El precio de Equipo2 se calcula con el Z del mismo día. Excluí ese día completo en lugar de interpolarlo, para no modificar el precio del equipo ni inventar valores.
+- **El dato erróneo dio la primera pista:** Equipo2 también subió ese día (de 783 a 828, +6%) y Equipo1 no. El precio de Equipo2 se calcula con el Z del mismo día. Excluí ese día completo en lugar de interpolarlo, para no modificar el precio del equipo ni inventar valores.
 
 ![Outlier de Z](figures/01_outlier_Z.png)
 
@@ -141,14 +141,14 @@ Al estimar la relación directamente en precios, los coeficientes resultaron pr�
 | Equipo1 | 0.198 | 0.801 | 0.000 (p = 0.90) | 0.03 (p = 0.96) | 0.9997 |
 | Equipo2 | 0.336 | 0.335 | 0.332 | 0.67 (p = 0.53) | 0.9997 |
 
-> **Equipo1 = 0.2·X + 0.8·Y**
+> **Equipo1 = 0.2X + 0.8Y**
 > **Equipo2 = (X + Y + Z) / 3**
 
 La prueba conjunta no rechaza que la constante sea cero y que los pesos sumen 1 (p = 0.98 y 0.77). El precio de cada equipo se comporta como una receta de insumos.
 
 Esto también explica por qué X parecía marginal en la regresión de retornos. Su peso en la fórmula es de 20% y 33%, pero su precio (~78) es mucho menor que el de Y (~555) o Z (~2,040). Por eso su efecto en porcentaje es chico. Con los precios más recientes, las elasticidades son:
 
-| % de cambio del equipo por cada 1% de cambio en… | X | Y | Z |
+| % de cambio del equipo por cada 1% de cambio en | X | Y | Z |
 |---|---|---|---|
 | Equipo1 | 0.04 | 0.97 | 0 |
 | Equipo2 | 0.03 | 0.20 | 0.76 |
@@ -236,12 +236,12 @@ Como no hay rezagos, esperar no mejora el pronóstico. Lo que sí lo mejora es *
 
 | Mes | Equipo1 P50 | Equipo1 rango 90% | Equipo2 P50 | Equipo2 rango 90% |
 |---|---|---|---|---|
-| sep-2023 | 458 | 409 – 528 | 923 | 845 – 1,015 |
-| oct-2023 | 456 | 381 – 583 | 930 | 806 – 1,074 |
-| nov-2023 | 456 | 367 – 624 | 920 | 767 – 1,111 |
-| dic-2023 | 455 | 351 – 640 | 925 | 750 – 1,140 |
-| ene-2024 | 454 | 335 – 671 | 927 | 729 – 1,179 |
-| feb-2024 | 452 | 319 – 699 | 929 | 705 – 1,215 |
+| sep-2023 | 458 | 409 a 528 | 923 | 845 a 1,015 |
+| oct-2023 | 456 | 381 a 583 | 930 | 806 a 1,074 |
+| nov-2023 | 456 | 367 a 624 | 920 | 767 a 1,111 |
+| dic-2023 | 455 | 351 a 640 | 925 | 750 a 1,140 |
+| ene-2024 | 454 | 335 a 671 | 927 | 729 a 1,179 |
+| feb-2024 | 452 | 319 a 699 | 929 | 705 a 1,215 |
 
 ![Pronóstico](figures/04_pronostico.png)
 
