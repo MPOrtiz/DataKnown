@@ -4,7 +4,7 @@
 set -euo pipefail
 
 RG="rg-dataknown-caso"
-REGION="${REGION:-eastus2}"
+REGION="${REGION:-westus2}"
 SKU="${SKU:-B1}"                          # B1 (básico) o F1 (gratis, con límites de CPU)
 PLAN="asp-dataknown-caso"
 APP="${APP_NAME:-app-dataknown-caso}"     # debe ser único en Azure; se puede cambiar con APP_NAME=...
