@@ -57,8 +57,11 @@ R² de 0.9997 en ambos. La correlación de 0.85 entre Equipo1 y Z es espuria: de
 │   ├── deploy_app.sh         # despliegue en Azure App Service
 │   └── arquitectura_azure.*  # diagrama de arquitectura
 ├── reports/
-│   ├── informe.md            # informe del caso
-│   └── figures/              # gráficas generadas por los notebooks
+│   ├── informe.md                  # informe del caso
+│   ├── presentacion_tecnica.pdf    # presentación técnica
+│   ├── presentacion_negocio.pdf    # presentación para dirección
+│   └── figures/                    # gráficas generadas por los notebooks
+├── .env.example              # plantilla de variables de entorno del agente
 └── .streamlit/config.toml    # tema visual de la app
 ```
 

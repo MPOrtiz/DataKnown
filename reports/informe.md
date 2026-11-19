@@ -247,7 +247,7 @@ Como no hay rezagos, esperar no mejora el pronóstico. Lo que sí lo mejora es *
 
 - **Equipo1 tiene más incertidumbre relativa** que Equipo2 (rango de 26% a 84% de su valor central, contra 18% a 55%), porque depende en 80% de Y, el insumo más volátil.
 - **Escenarios:** si Y sube 15%, Equipo1 sube 14.4% y Equipo2 3.0%. Si Z baja 10%, Equipo2 baja 7.7% y Equipo1 no cambia.
-- **Validación con datos reales:** `X.csv` trae datos hasta marzo 2024. Los 7 meses reales de X (sep-2023 a mar-2024) cayeron dentro del rango proyectado.
+- **Validación con datos reales:** `X.csv` trae datos hasta abril de 2024. Los 7 meses completos de X posteriores al último dato (sep-2023 a mar-2024) cayeron dentro del rango proyectado.
 
 ---
 
