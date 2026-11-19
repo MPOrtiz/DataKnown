@@ -5,7 +5,7 @@ Análisis de qué materias primas determinan el costo de dos equipos críticos, 
 - **Informe completo:** [reports/informe.md](reports/informe.md)
 - **Presentaciones:** [técnica](reports/presentacion_tecnica.pdf) · [negocio](reports/presentacion_negocio.pdf)
 - **Agente en línea:** https://app-dataknown-caso.azurewebsites.net
-- **Arquitectura:** [infra/arquitectura_azure.png](infra/arquitectura_azure.png) (editable en [infra/arquitectura_azure.drawio](infra/arquitectura_azure.drawio))
+- **Arquitectura:** [infra/arquitectura_azure.png](infra/arquitectura_azure.png)
 
 ---
 

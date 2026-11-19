@@ -81,7 +81,7 @@ Un **agente de IA** tiene un objetivo y decide cómo alcanzarlo. El que constru�
 
 Lo que implementé (borde verde): Azure OpenAI con `gpt-5.4-mini` en modalidad Data Zone (procesamiento dentro de EE. UU.), el agente en App Service, búsqueda web de noticias, presupuesto con alertas en Cost Management y despliegue reproducible con `infra/deploy_app.sh`. La key del modelo nunca está en el código: se lee de la configuración de Azure.
 
-Para producción propongo (borde punteado): Data Factory para la ingesta, Data Lake Gen2 con zonas raw/processed/forecast, Azure ML para entrenar y registrar el modelo, una Function App que genere el pronóstico cada mes, Azure SQL y Power BI para finanzas, y Key Vault, Entra ID y Application Insights para seguridad y monitoreo. El diagrama editable está en `infra/arquitectura_azure.drawio`.
+Para producción propongo (borde punteado): Data Factory para la ingesta, Data Lake Gen2 con zonas raw/processed/forecast, Azure ML para entrenar y registrar el modelo, una Function App que genere el pronóstico cada mes, Azure SQL y Power BI para finanzas, y Key Vault, Entra ID y Application Insights para seguridad y monitoreo.
 
 ---
 
