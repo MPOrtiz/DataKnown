@@ -3,6 +3,7 @@
 Análisis de qué materias primas determinan el costo de dos equipos críticos, un pronóstico mensual con intervalos de confianza y un agente de IA en Azure que responde preguntas sobre los resultados y los complementa con noticias del mercado.
 
 - **Informe completo:** [reports/informe.md](reports/informe.md)
+- **Presentaciones:** [técnica](reports/presentacion_tecnica.pdf) · [negocio](reports/presentacion_negocio.pdf)
 - **Agente en línea:** https://app-dataknown-caso.azurewebsites.net
 - **Arquitectura:** [infra/arquitectura_azure.png](infra/arquitectura_azure.png) (editable en [infra/arquitectura_azure.drawio](infra/arquitectura_azure.drawio))
 
@@ -127,4 +128,3 @@ Principio de diseño: **el LLM interpreta la pregunta y redacta la respuesta; lo
 
 Python, pandas, statsmodels, scikit-learn, Streamlit, Altair, Azure OpenAI (`gpt-5.4-mini`), Azure App Service, Azure CLI
 
-- **Presentaciones:** [técnica](reports/presentacion_tecnica.pdf) · [negocio](reports/presentacion_negocio.pdf)
