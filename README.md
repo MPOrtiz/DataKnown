@@ -126,3 +126,5 @@ Principio de diseño: **el LLM interpreta la pregunta y redacta la respuesta; lo
 ## Tecnologías
 
 Python, pandas, statsmodels, scikit-learn, Streamlit, Altair, Azure OpenAI (`gpt-5.4-mini`), Azure App Service, Azure CLI
+
+- **Presentaciones:** [técnica](reports/presentacion_tecnica.pdf) · [negocio](reports/presentacion_negocio.pdf)
