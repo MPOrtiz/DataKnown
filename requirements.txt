@@ -1,0 +1,11 @@
+pandas
+numpy
+matplotlib
+statsmodels
+scikit-learn
+jupyter
+ipykernel
+openai
+python-dotenv
+streamlit
+ddgs
